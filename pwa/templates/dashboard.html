@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <!-- Sidebar only in the dashboard page -->
+  <aside class="sidebar">
+    <h1 class="logo">Victory Lap</h1>
+    <ul class="menu">
+      <li><a href="{{ url_for('routes.dashboard') }}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+      <li><a href="#"><i class="fa fa-user"></i><span>Profile</span></a></li>
+      <li><a href="#"><i class="fa fa-pencil"></i><span>Log a workout</span></a></li>
+      <li><a href="#"><i class="fa fa-calendar"></i><span>Classes</span></a></li>
+    </ul>
+  </aside>
+
+  <section class="dashboard">
+    <div class="card">
+      <i class="fa fa-line-chart"></i>
+      <h3>Workout Progress</h3>
+      <p>Track your weekly progress here.</p>
+    </div>
+    <div class="card">
+      <i class="fa fa-calendar-check-o"></i>
+      <h3>Upcoming Classes</h3>
+      <p>See the next scheduled classes.</p>
+    </div>
+    <div class="card">
+      <i class="fa fa-bar-chart"></i>
+      <h3>Profile Summary</h3>
+      <p>View a quick summary of your stats.</p>
+    </div>
+  </section>
+{% endblock %}

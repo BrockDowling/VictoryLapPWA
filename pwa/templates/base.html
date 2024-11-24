@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victory Lap</title>
+  <link rel="stylesheet" href="static/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="container">
+    <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
+
+    <!-- Main content of each page is injected here -->
+    <main class="main-content">
+      <header class="header">
+        <h2>Victory Lap</h2>
+      </header>
+
+      <!-- Page-specific content will go here -->
+      {% block content %}
+      {% endblock %}
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const hamburger = document.querySelector('.hamburger');
+      const logo = document.querySelector('.logo');
+      
+      sidebar.classList.toggle('active');
+      hamburger.classList.toggle('active');
+      
+      // Update logo text based on sidebar state
+      logo.textContent = sidebar.classList.contains('active') ? 'Victory Lap' : 'VL';
+    }
+
+    function updateLogo() {
+      const sidebar = document.querySelector('.sidebar');
+      const logo = document.querySelector('.logo');
+      
+      if (window.innerWidth <= 500) { 
+        logo.textContent = sidebar.classList.contains('active') ? 'Victory Lap' : 'VL';
+      } else {
+        logo.textContent = 'Victory Lap';
+      }
+    }
+
+    updateLogo();
+    window.addEventListener('resize', updateLogo);
+  </script>
+</body>
+</html>
