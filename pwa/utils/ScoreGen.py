@@ -1,6 +1,8 @@
 from logging import raiseExceptions
 import psycopg
 from psycopg import connect
+# import routes for info 
+from app import routes
 
 DBUrl = ("Secret Key")
 # Create connection and cursor objects
@@ -13,8 +15,11 @@ except:
 
 cur = conn.cursor()
 
+
+# current_user_id = api call to get username, get user_id where username = usernmae
+
 data_query = (""" WITH temp as (SELECT weight, weightused, setschosen, repschosen, RANK () OVER (partition by workoutid ORDER BY timelogged DESC) as ranked FROM Users
-                LEFT JOIN WorkoutQuestions on workoutquestions.userid = users.userid) select * from temp where ranked = 1""")
+                LEFT JOIN WorkoutQuestions on workoutquestions.userid = users.userid) select * from temp where ranked = 1 AND UserID = current_user_id""")
 
 cur.execute(data_query)
 # need to alter for flask implementation
@@ -34,6 +39,7 @@ def calc_score(entry):
 
 try:
     calc_score(result_data)
+    # insert into database user workout score for workout at dateentered 
 except:
     raise Exception("Cannot calculate workout score")
 

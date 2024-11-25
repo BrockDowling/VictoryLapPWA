@@ -2,13 +2,21 @@ import os
 from psycopg import connect
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+
+base_dir = os.path.dirname(os.path.abspath(__file__))  # Current script's directory (e.g., pwa/utils)
+project_dir = os.path.dirname(os.path.dirname(base_dir))  # Move two levels up to VictoryLapPWA
+
+# Construct the path to the .env file
+dotenv_path = os.path.join(project_dir, '.env')
+
+# Load the .env filess
+load_dotenv(dotenv_path=dotenv_path)
 
 def list_tables():
     try:
         # Get the database URL from .env
         database_url = os.getenv("DATABASE_URL")
+
         if not database_url:
             raise ValueError("DATABASE_URL is not set in .env")
 
